@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+
+/* Taken from the logo: a black field, barber-pole red and blue, the bone
+   white of the ribbon, and the bronze of the skull emblem. */
+@theme {
+  --color-ink: #0c0a09;
+  --color-coal: #191614;
+  --color-bone: #f2ece1;
+  --color-red: #c4262e;
+  --color-blue: #2a5aa8;
+  --color-bronze: #b39d77;
+
+  --font-display: 'Libre Caslon Condensed', 'Times New Roman', serif;
+  --font-body: 'Libre Caslon Text', Georgia, serif;
+
+  --ease-silk: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-wipe: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+html {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  background: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+::selection {
+  background: var(--color-red);
+  color: #fff;
+}
+:focus-visible {
+  outline: 2px solid var(--color-bronze);
+  outline-offset: 3px;
+}
+a,
+button {
+  touch-action: manipulation;
+}
+
+/* Condensed serif capitals, tight; italic lines lean out */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+.display .it,
+.display.it {
+  font-style: italic;
+}
+/* Small serif capitals with wide tracking, for labels and buttons */
+.caps {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  line-height: 1.7;
+}
+/* Readable running text */
+.prose-body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* Barber-pole stripes: the logo's red, bone and blue on the diagonal. */
+.pole {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-red) 0 22px,
+    var(--color-bone) 22px 44px,
+    var(--color-blue) 44px 66px,
+    var(--color-bone) 66px 88px
+  );
+  background-size: 124.45px 124.45px;
+}
+
+/* Reveal on scroll: hidden until useReveals adds .is-in */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--ease-silk),
+    transform 0.9s var(--ease-silk);
+  transition-delay: var(--d, 0s);
+}
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Slow camera push on each hero photo while it is showing */
+@keyframes push {
+  from { transform: scale(1.02) translate3d(0, 0, 0); }
+  to { transform: scale(1.14) translate3d(-1.5%, -1%, 0); }
+}
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 0.6s steps(3) infinite;
+}
+@keyframes grain {
+  0% { transform: translate3d(0, 0, 0); }
+  33% { transform: translate3d(-3%, 2%, 0); }
+  66% { transform: translate3d(2%, -3%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
