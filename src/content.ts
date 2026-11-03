@@ -3,6 +3,8 @@
  * studio's Facebook page; anything marked TODO still needs the owner's check.
  */
 
+import {site} from './lib/media';
+
 export const brand = {
   name: 'Excellence',
   full: 'Excellence Beauty Studio',
@@ -36,11 +38,11 @@ export const whatsapp = (msg = 'Hi Excellence, I’d like to book a chair.') =>
 export type PageId = 'home' | 'services' | 'gallery' | 'about' | 'contact';
 
 export const pages: {id: PageId; label: string; href: string}[] = [
-  {id: 'home', label: 'Home', href: '/'},
-  {id: 'services', label: 'Services', href: '/services/'},
-  {id: 'gallery', label: 'Gallery', href: '/gallery/'},
-  {id: 'about', label: 'About', href: '/about/'},
-  {id: 'contact', label: 'Book & contact', href: '/contact/'},
+  {id: 'home', label: 'Home', href: site('/')},
+  {id: 'services', label: 'Services', href: site('/services/')},
+  {id: 'gallery', label: 'Gallery', href: site('/gallery/')},
+  {id: 'about', label: 'About', href: site('/about/')},
+  {id: 'contact', label: 'Book & contact', href: site('/contact/')},
 ];
 
 export type Photo = {src: string; w: number; h: number; alt: string; tag: 'cuts' | 'braids' | 'beard' | 'studio'};
@@ -119,7 +121,7 @@ export const chairs: Chair[] = [
     photo: 'cut-swirl-design.jpg',
     pos: '50% 40%',
     specs: [['Speciality', 'Skin fades & designs'], ['For', 'Men, women & kids']],
-    href: '/services/#cuts',
+    href: site('/services/#cuts'),
     tint: '#c4262e',
   },
   {
@@ -128,7 +130,7 @@ export const chairs: Chair[] = [
     photo: 'braids-kid-front.jpg',
     pos: '50% 30%',
     specs: [['Speciality', 'Cornrows & feed-ins'], ['Finish', 'Knotless, curls, ponies']],
-    href: '/services/#braids',
+    href: site('/services/#braids'),
     tint: '#2a5aa8',
   },
   {
@@ -137,7 +139,7 @@ export const chairs: Chair[] = [
     photo: 'beard-sculpt.jpg',
     pos: '50% 55%',
     specs: [['Speciality', 'Sculpt & shape-up'], ['Tools', 'Razor, clippers, care']],
-    href: '/services/#beard',
+    href: site('/services/#beard'),
     tint: '#b39d77',
   },
 ];

@@ -7,7 +7,7 @@ import {photos, studioPhoto} from '../content';
 import {useReducedMotion} from '../hooks/useReducedMotion';
 import {useReveals} from '../hooks/useReveals';
 import {linkClick} from '../lib/nav';
-import {media} from '../lib/media';
+import {media, site} from '../lib/media';
 import {mount} from '../mount';
 
 const strip = ['cut-heart-design.jpg', 'braids-kid-side.jpg', 'cut-bun-design-2.jpg', 'braids-copper-top.jpg', 'cut-cornrow-fade.jpg'].map(
@@ -41,7 +41,7 @@ function Home() {
           </p>
           <a
             data-reveal
-            href="/about/"
+            href={site('/about/')}
             onClick={linkClick}
             className="caps mt-8 inline-flex items-center gap-3 border-b border-bone/40 pb-1 transition-[gap] duration-500 hover:gap-5"
           >
@@ -73,7 +73,7 @@ function Home() {
           </div>
           <a
             data-reveal
-            href="/gallery/"
+            href={site('/gallery/')}
             onClick={linkClick}
             className="caps inline-flex min-h-11 items-center gap-3 border border-bone/35 px-6 py-3 transition-colors hover:bg-bone hover:text-ink"
           >
@@ -83,7 +83,7 @@ function Home() {
         <ul className="mx-auto mt-14 grid max-w-[1680px] grid-cols-2 gap-[3px] px-5 md:grid-cols-5 md:px-14">
           {strip.map((p, n) => (
             <li key={p.src} data-reveal style={{'--d': `${n * 0.07}s`} as CSSProperties} className={n === 4 ? 'max-md:hidden' : ''}>
-              <a href="/gallery/" onClick={linkClick} className="group block overflow-hidden" aria-label={`${p.alt} — open gallery`}>
+              <a href={site('/gallery/')} onClick={linkClick} className="group block overflow-hidden" aria-label={`${p.alt} — open gallery`}>
                 <img
                   src={media(p.src)}
                   alt=""

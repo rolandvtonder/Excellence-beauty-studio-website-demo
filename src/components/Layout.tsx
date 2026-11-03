@@ -2,6 +2,7 @@ import {useCallback, useEffect, useRef, useState, type ReactNode} from 'react';
 import {brand, whatsapp, type PageId} from '../content';
 import {useReducedMotion} from '../hooks/useReducedMotion';
 import {linkClick} from '../lib/nav';
+import {site} from '../lib/media';
 import {lockScroll, scrollToHash, startScroll} from '../lib/scroll';
 import {Footer} from './Footer';
 import {Icon} from './Icon';
@@ -49,7 +50,7 @@ export function Layout({page, children}: {page: PageId; children: ReactNode}) {
       </a>
 
       <a
-        href="/"
+        href={site('/')}
         onClick={linkClick}
         inert={open}
         className="fixed top-5 left-5 z-[55] text-white mix-blend-difference md:top-7 md:left-14"
